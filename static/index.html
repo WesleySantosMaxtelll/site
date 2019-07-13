@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="latin-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello World</title>
@@ -27,10 +27,13 @@
         $( document ).ready(function() {
             $.i18n().load( {
                 en: {
-                    "welcome": "Welcome.",
+                    "welcome": "Stance Predicter",
                     "name": "name",
                     "what_is_your_name": "What is your name?",
-                    "hello": "Hello $1",
+                    "what_is_your_opinion": "Escreva sua opinião abaixo",
+                    "apoio": "Este projeto tem o apoio da Fapesp",
+                    "select_topic": "Selecione o tópico",
+                    "hello": "Acreditamos que você tem uma opinião $1 ao tema",
                     "added_to_database": "Hello $1, I've added you to the database!",
                     "database_contents": "Database contents: "
                 },
@@ -44,7 +47,7 @@
                 }
             } );
             $('body').i18n();
-            $('#user_name').attr("placeholder", $.i18n('name') );
+            $('#user_name').attr("placeholder", $.i18n('O que pensa sobre o tópico escolhido?') );
         });
         </script>
 
@@ -53,17 +56,29 @@
 <body>
     <div class="container" id="container">
         <h1 data-i18n="welcome"></h1> <!- Welcome ->
+
         <div id="nameInput" class="input-group-lg center-block helloInput">
-            <p class="lead" data-i18n="what_is_your_name"></p>
-            <input id="user_name" type="text" class="form-control" aria-describedby="sizing-addon1" value="" />
+            <p id="topic" class="lead" data-i18n="select_topic"></p>
+              <input type="radio" name="topics" value="aborto"> Aborto<br>
+              <input type="radio" name="topics" value="cotas"> Cotas raciais<br>
+              <input type="radio" name="topics" value="maconha"> Maconha<br>
+              <input type="radio" name="topics" value="maioridade"> Maioridade Penal<br>
+              <input type="radio" name="topics" value="pena"> Penas de Morte<br><br><br> 
+
+
+            <p class="lead" data-i18n="what_is_your_opinion"></p>
+            
+            <textarea id="user_name" name="Text1" cols="70" rows="5"></textarea>
+            <button onclick="submitFunction()">Submeter</button><br><br> 
+            <!-- <input id="user_name" type="text" class="form-control" aria-describedby="sizing-addon1" value="" /> -->
+            <p id="response" class="lead text-center"></p>
         </div>
-        <p id="response" class="lead text-center"></p>
 
         <p id="databaseNames" class="lead text-center"></p>
     </div>
     <footer class="footer">
         <div class="container">
-            <span><a href="https://console.bluemix.net/docs/tutorials/index.html" target="_blank">Looking for more tutorials?</a></span>
+            <p class="lead" data-i18n="apoio"></p>
         </div>
     </footer>
 
@@ -75,31 +90,32 @@
 
 <script>
     	//Submit data when enter key is pressed
-        $('#user_name').keydown(function(e) {
-        	var name = $('#user_name').val();
-            if (e.which == 13 && name.length > 0) { //catch Enter key
+        // $('#user_name').keydown(function(e) 
+        function submitFunction(){
+            var radios = document.querySelector('input[name="topics"]:checked').value;
+        	var text = $('#user_name').val();
+            
+            if (text.length > 0) { //catch Enter key
             	//POST request to API to create a new visitor entry in the database
                 $.ajax({
-				  method: "POST",
-				  url: "./api/visitors",
-				  contentType: "application/json",
-				  data: JSON.stringify({name: name })
-				})
+    			  method: "POST",
+    			  url: "./api/visitors",
+    			  contentType: "application/json",
+    			  data: JSON.stringify({text, text, radios: radios})
+    			})
                 .done(function(data) {
-                    if(data && data.name){
-                        if(data._id)
-                            $('#response').html($.i18n('added_to_database', AntiXSS.sanitizeInput(data.name)));
-                        else
-                            $('#response').html($.i18n('hello', AntiXSS.sanitizeInput(data.name))); 
-                    }
-                    else {
-                        $('#response').html(AntiXSS.sanitizeInput(data));
-                    }
-                    $('#nameInput').hide();
+                    // if(data && data.text){
+                    // document.getElementById("response").innerHTML = "Hello World";
+                    $('#response').html($.i18n('hello', AntiXSS.sanitizeInput(data.prediction))); 
+                    // }
+                    // else {
+                    // $('#response').html(AntiXSS.sanitizeInput(data));
+                    // }
+                    // $('#nameInput').hide();
                     getNames();
                 });
             }
-        });
+        }
 
         //Retrieve all the visitors from the database
         function getNames(){

@@ -1,5 +1,6 @@
 from cloudant import Cloudant
 from flask import Flask, render_template, request, jsonify
+from Interface import interface
 import atexit
 import os
 import json
@@ -9,6 +10,7 @@ app = Flask(__name__, static_url_path='')
 db_name = 'mydb'
 client = None
 db = None
+inter = interface()
 
 if 'VCAP_SERVICES' in os.environ:
     vcap = json.loads(os.getenv('VCAP_SERVICES'))
@@ -69,15 +71,14 @@ def get_visitor():
 #  */
 @app.route('/api/visitors', methods=['POST'])
 def put_visitor():
-    user = request.json['name']
-    data = {'name':user}
-    if client:
-        my_document = db.create_document(data)
-        data['_id'] = my_document['_id']
-        return jsonify(data)
-    else:
-        print('No database')
-        return jsonify(data)
+
+    # print(request.json)
+
+    topic = request.json['radios']
+    text = request.json['text']
+    resp = inter.request(text, topic)
+
+    return jsonify({'prediction':resp})
 
 @atexit.register
 def shutdown():
