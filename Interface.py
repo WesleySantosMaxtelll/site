@@ -12,12 +12,7 @@ from Model import Predicter
 
 class interface:
     def __init__(self):
-        # Novas mensagens
-        self.sem_income = threading.Semaphore()
-        self.sem_outcome = threading.Semaphore()
-        self.list_income = []
-        self.list_outcome = []
-        self.p = Predicter()
+        self.p = Predicter.instance()
         self.dict = {1:'Contrária', 2:'Favorável'}
 
     def request(self, text, tag):
