@@ -9,20 +9,37 @@ class Predicter:
         # './modelos/'
         
 
-        self.switch_tools = {
-            'aborto': ["aborto_classifier.joblib", "aborto_r.joblib"],
-            'cotas': ["cotas_classifier.joblib", "cotas_r.joblib"],
-            'maconha': ["maconha_classifier.joblib", "maconha_r.joblib"],
-            'maioridade': ["maioridade_classifier.joblib", "maioridade_r.joblib"],
-            'pena': ["pena_classifier.joblib", "pena_r.joblib"]
+        self.switch_tools_polaridade = {
+            'aborto': ["polaridade/aborto_classifier.joblib", "polaridade/aborto_r.joblib"],
+            'cotas': ["polaridade/cotas_classifier.joblib", "polaridade/cotas_r.joblib"],
+            'maconha': ["polaridade/maconha_classifier.joblib", "polaridade/maconha_r.joblib"],
+            'maioridade': ["polaridade/maioridade_classifier.joblib", "polaridade/maioridade_r.joblib"],
+            'pena': ["polaridade/pena_classifier.joblib", "polaridade/pena_r.joblib"]
         }
+
+
+        self.switch_tools_posicionamento = {
+            'aborto': ["posicionamento/aborto_classifier.joblib", "posicionamento/aborto_r.joblib"],
+            'cotas': ["posicionamento/cotas_classifier.joblib", "posicionamento/cotas_r.joblib"],
+            'maconha': ["posicionamento/maconha_classifier.joblib", "posicionamento/maconha_r.joblib"],
+            'maioridade': ["posicionamento/maioridade_classifier.joblib", "posicionamento/maioridade_r.joblib"],
+            'pena': ["posicionamento/pena_classifier.joblib", "posicionamento/pena_r.joblib"]
+        }
+
+
 
 
     def load_file(self, path):
         return load(self.initial_path + path)
 
-    def _get_tools(self, label):
-        classifier, representation = self.switch_tools.get(label, (None, None))
+    def _get_tools_posicionamento(self, label):
+        classifier, representation = self.switch_tools_posicionamento.get(label, (None, None))
+        print(classifier)
+        print(representation)
+        return classifier, representation
+
+    def _get_tools_polaridade(self, label):
+        classifier, representation = self.switch_tools_polaridade.get(label, (None, None))
         print(classifier)
         print(representation)
         return classifier, representation
@@ -33,12 +50,23 @@ class Predicter:
 
     def get_predict(self, text_vectorized, classifier):
         c = self.load_file(classifier)
-        return c.predict(text_vectorized)
+        return c.predict_proba(text_vectorized)
 
     def predict_text_stance(self, label, text):
         print(text)
-        classifier, representation = self._get_tools(label)
+        classifier, representation = self._get_tools_posicionamento(label)
         text_vectorized = self.get_text_vectorized(text, representation)
         pred = self.get_predict(text_vectorized, classifier)
-        return pred[0]
+        print(pred)
+        if pred[0][0] > 3*pred[0][1]:
+            return 0, 0
+
+        classifier, representation = self._get_tools_polaridade(label)
+        text_vectorized = self.get_text_vectorized(text, representation)
+        pred = self.get_predict(text_vectorized, classifier)
+        print(pred)
+        if pred[0][0] > pred[0][1]:
+            return 1, 1
+        else:
+            return 1, 2
 

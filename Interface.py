@@ -16,6 +16,11 @@ class interface:
         self.dict = {1:'Contrária', 2:'Favorável'}
 
     def request(self, text, tag):
-        d = self.dict[self.p.predict_text_stance(tag, text)]
+        cat, pred = self.p.predict_text_stance(tag, text)
+        d = None
+        if cat == 0:
+            d = 'Sem Posicionamento'
+        else:
+            d = self.dict[pred]
         print(d)
         return d
