@@ -50,13 +50,13 @@ def root():
 # *     "name": "Bob"
 # * }
 # */
-@app.route('/api/visitors', methods=['GET'])
-def get_visitor():
-    if client:
-        return jsonify(list(map(lambda doc: doc['name'], db)))
-    else:
-        print('No database')
-        return jsonify([])
+# @app.route('/api/visitors', methods=['GET'])
+# def get_visitor():
+#     if client:
+#         return jsonify(list(map(lambda doc: doc['name'], db)))
+#     else:
+#         print('No database')
+#         return jsonify([])
 
 # /**
 #  * Endpoint to get a JSON array of all the visitors in the database
@@ -69,16 +69,23 @@ def get_visitor():
 #  * [ "Bob", "Jane" ]
 #  * @return An array of all the visitor names
 #  */
-@app.route('/api/visitors', methods=['POST'])
+@app.route('/post', methods=['POST', 'GET'])
 def put_visitor():
 
-    # print(request.json)
+    if request.method == 'POST':
+        print(request.json)
+        topic = request.json['radios']
+        text = request.json['text']
+        resp = inter.request(text, topic)
+        # return {'prediction':'Teste'}
+        # print(resp)
+        # resp = 'Resposta'
+        return resp
+        # return jsonify({'prediction':resp})
 
-    topic = request.json['radios']
-    text = request.json['text']
-    resp = inter.request(text, topic)
-
-    return jsonify({'prediction':resp})
+    else:
+        resp = 'Resposta'
+        return jsonify({'prediction':resp})
 
 @atexit.register
 def shutdown():

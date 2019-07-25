@@ -77,7 +77,7 @@ class Predicter:
         #     return 1, 1
         # else:
 
-        if abs(pred_polaridade[0][0] - pred_polaridade[0][1]) > 0.3:
+        if abs(pred_polaridade[0][0] - pred_polaridade[0][1]) > 0.6:
 
             if pred_polaridade[0][0] > pred_polaridade[0][1]:
                 return 1, 1
@@ -85,7 +85,7 @@ class Predicter:
                 return 1, 2
 
 
-        if pred_posicionamento[0][0] > 5*pred_posicionamento[0][1]:
+        if pred_posicionamento[0][0] > 0.5*pred_posicionamento[0][1]:
             return 0, 0
 
         if pred_polaridade[0][0] > pred_polaridade[0][1]:

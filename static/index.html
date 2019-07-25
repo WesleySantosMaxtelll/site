@@ -1,19 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script src="antixss.js" type="text/javascript"></script>
+    <script>
+        $( document ).ready(function() {
+            $.i18n().load( {
+                en: {
+                    "what_is_your_name": "What is your name?",
+                    "what_is_your_opinion": "Escreva sua opinião abaixo",
+                    "apoio": "Este projeto tem o apoio da Fapesp",
+                    "select_topic": "Selecione o tópico",
+                    "hello": "Acreditamos que você tem uma opinião ao tema"
+                },
+            } );
+            $('body').i18n();
+            // $('#user_name').attr("placeholder", $.i18n('O que pensa sobre o tópico escolhido?') );
+        });
+        </script>
 
-<head>
-    <meta charset="latin-1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello World</title>
 
-    <!-- Bootstrap -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
+
+    <title>Stance Predictor &mdash; Website by Colorlib</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+
+
+   <!-- Bootstrap -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link href="styles.css" rel="stylesheet"> -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/lib/jquery.i18n/jquery.i18n.js"></script>
     <script src="js/lib/jquery.i18n/jquery.i18n.messagestore.js"></script>
     <script src="js/lib/jquery.i18n/jquery.i18n.fallbacks.js"></script>
@@ -21,117 +60,578 @@
     <script src="js/lib/jquery.i18n/jquery.i18n.parser.js"></script>
     <script src="js/lib/jquery.i18n/jquery.i18n.emitter.js"></script>
     <script src="js/lib/jquery.i18n/jquery.i18n.emitter.bidi.js"></script>
-    <script src="antixss.js" type="text/javascript"></script>
+ -->
+    <style>
+      .loader {
+        border: 10px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 10px solid blue;
+        border-bottom: 10px solid blue;
+        width: 60px;
+        height: 60px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }
 
-    <script>
-        $( document ).ready(function() {
-            $.i18n().load( {
-                en: {
-                    "welcome": "Stance Predicter",
-                    "name": "name",
-                    "what_is_your_name": "What is your name?",
-                    "what_is_your_opinion": "Escreva sua opinião abaixo",
-                    "apoio": "Este projeto tem o apoio da Fapesp",
-                    "select_topic": "Selecione o tópico",
-                    "hello": "Acreditamos que você tem uma opinião $1 ao tema",
-                    "added_to_database": "Hello $1, I've added you to the database!",
-                    "database_contents": "Database contents: "
-                },
-                ja: {
-                    "welcome": "ようこそ。",
-                    "name": "名前",
-                    "what_is_your_name": "お名前を教えてください。",
-                    "hello": "こんにちは $1",
-                    "added_to_database": "こんにちは $1 さん、あなたをデータベースに追加しました。",
-                    "database_contents": "データベースの内容: "
-                }
-            } );
-            $('body').i18n();
-            $('#user_name').attr("placeholder", $.i18n('O que pensa sobre o tópico escolhido?') );
-        });
-        </script>
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
 
-</head>
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      </style>
+  </head>
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  
+  <div class="site-wrap">
 
-<body>
-    <div class="container" id="container">
-        <h1 data-i18n="welcome"></h1> <!- Welcome ->
-
-        <div id="nameInput" class="input-group-lg center-block helloInput">
-            <p id="topic" class="lead" data-i18n="select_topic"></p>
-              <input type="radio" name="topics" value="aborto"> Aborto<br>
-              <input type="radio" name="topics" value="cotas"> Cotas raciais<br>
-              <input type="radio" name="topics" value="maconha"> Maconha<br>
-              <input type="radio" name="topics" value="maioridade"> Maioridade Penal<br>
-              <input type="radio" name="topics" value="pena"> Pena de Morte<br><br><br> 
-
-
-            <p class="lead" data-i18n="what_is_your_opinion"></p>
-            
-            <textarea id="user_name" name="Text1" cols="70" rows="5"></textarea>
-            <button onclick="submitFunction()">Submeter</button><br><br> 
-            <!-- <input id="user_name" type="text" class="form-control" aria-describedby="sizing-addon1" value="" /> -->
-            <p id="response" class="lead text-center"></p>
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
         </div>
-
-        <p id="databaseNames" class="lead text-center"></p>
+      </div>
+      <div class="site-mobile-menu-body"></div>
     </div>
-    <footer class="footer">
-        <div class="container">
-            <p class="lead" data-i18n="apoio"></p>
+   
+    
+    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+      
+      <div class="container-fluid">
+        <div class="d-flex align-items-center">
+          <div class="site-logo mr-auto w-25"><a href="index.html">Stance Recognition</a></div>
+
+          <div class="mx-auto text-center">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
+                <li><a href="#home-section" class="nav-link">Home</a></li>
+                <li><a href="#predictor-section" class="nav-link">Predictor</a></li>
+                <li><a href="#statistics-section" class="nav-link">Estatísticas</a></li>
+                <li><a href="#suppoters-section" class="nav-link">Apoiadores</a></li>
+              </ul>
+            </nav>
+          </div>
         </div>
+      </div>
+      
+    </header>
+
+    <div class="intro-section" id="home-section">
+      
+      <div class="slide-1" style="background-image: url('images/chat.png');" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="row align-items-center">
+                <div class="col-lg-6 mb-4">
+                  <h1  data-aos="fade-up" data-aos-delay="100">Detector de posicionamento automático por texto</h1>
+                  <p class="mb-4"  data-aos="fade-up" data-aos-delay="200">Este projeto tem como objetivo detectar o posicionamento sobre temas de natureza moral.</p>
+                  <p data-aos="fade-up" data-aos-delay="300"><a href="#predictor-section" class="btn btn-primary py-3 px-5 btn-pill">Teste Agora</a></p>
+
+                </div>
+
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="site-section courses-title" id="predictor-section" data-aos-delay="100">
+      <div class="container">
+        <div class="row mb-5 justify-content-center">
+          <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
+            <h2 class="section-title">Predictor</h2>
+          </div>
+        </div>
+
+
+        <div class="container">
+
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="500">
+          <form action="" method="post" class="form-box">
+
+            <div class="form-group row">
+                <div class="col-md-6 mb-3 mb-lg-0">
+                  <h3 class="h4 text-black mb-4">Selecione um dos tópicos abaixo</h3>
+                    <div class="form-group">
+                      
+                      <p id="topic" class="lead" data-i18n="select_topic"></p>
+                        <input type="radio" name="topics" value="aborto"> Descriminalização do Aborto<br>
+                        <input type="radio" name="topics" value="cotas"> Cotas raciais<br>
+                        <input type="radio" name="topics" value="maconha"> Descriminalização da Maconha<br>
+                        <input type="radio" name="topics" value="maioridade"> Redução da Maioridade Penal<br>
+                        <input type="radio" name="topics" value="pena"> Pena de Morte<br><br><br> 
+
+                      <!-- <p class="lead" data-i18n="what_is_your_opinion"></p> -->
+
+                      <!-- <input type="text" class="form-control" placeholder="Email Addresss"> -->
+
+                        <p id="response" class="lead text-center"></p>
+
+                        <div id="loader_response" style="display:none;" class="row">
+                            
+                            <div class="loader"></div>
+                            <p class="lead text-center">Estamos processando. Por favor aguarde</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <textarea id="user_name" class="form-control" id="" cols="100" rows="12" placeholder="De sua opinião sobre o tópico."></textarea>
+                        </div>
+                  </div>
+
+
+                   <!-- <p class="lead" data-i18n="Escreva sua opinião abaixo"></p> --><!-- 
+                   <textarea id="user_name" class="form-control" id="" cols="100" rows="12" placeholder="De sua opinião sobre o tópico."></textarea> -->
+                    <!-- <textarea id="user_name" name="Text1" cols="40" rows="10"></textarea> -->
+                     <div class="form-group row">
+                      <div class="col-md-6">
+                        
+                        <input id="button-sub" onclick="submitFunction()" type="button" class="btn btn-primary py-7 px-5 btn-block btn-pill" value="Submeter">
+
+                      </div>
+                    </div>
+                    
+                  <!--   <button onclick="submitFunction()" class="customPrevBtn btn btn-primary m-1">Submeter</button> -->
+                    <!-- <button onclick="submitFunction()">Submeter</button><br><br>  -->
+                    <!-- <input id="user_name" type="text" class="form-control" aria-describedby="sizing-addon1" value="" /> -->
+
+                </div>
+              </div>
+          </form>
+
+        </div>
+
+      <!--   <div class="row justify-content-center">
+          <div class="col-7 text-center">
+            <button class="customPrevBtn btn btn-primary m-1">Prev</button>
+            <button class="customNextBtn btn btn-primary m-1">Next</button>
+          </div>
+        </div> -->
+      </div>
+
+
+
+      </div>
+    </div>
+    <!-- <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
+      <form action="" method="post" class="form-box">
+        <h3 class="h4 text-black mb-4">Sign Up</h3>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Email Addresss">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group mb-4">
+          <input type="password" class="form-control" placeholder="Re-type Password">
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-primary btn-pill" value="Sign up">
+        </div>
+      </form>
+
+    </div> -->
+
+
+    <div class="site-section" id="statistics-section">
+      <div class="container">
+        <div class="row mb-5 justify-content-center">
+          <div class="col-lg-7 text-center"  data-aos="fade-up" data-aos-delay="">
+            <h2 class="section-title">Estatísticas</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam repellat aut neque! Doloribus sunt non aut reiciendis, vel recusandae obcaecati hic dicta repudiandae in quas quibusdam ullam, illum sed veniam!</p>
+          </div>
+           <!-- <div class="loader"></div> -->
+        </div>
+        <section class="cool_facts_area clearfix">
+        <div class="container">
+            <div class="row">
+                <!-- Single Cool Fact-->
+                <div class="col-12 col-md-3 col-lg-3">
+                    <div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="counter-area">
+                            <h3><span class="counter">350</span></h3>
+                        </div>
+                        <div class="cool-facts-content">
+                            <i class="ion-arrow-down-a"></i>
+                            <p>Análises <br> REALIZADAS</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single Cool Fact-->
+                <div class="col-12 col-md-3 col-lg-3">
+                    <div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="counter-area">
+                            <h3><span class="counter">76%</span></h3>
+                        </div>
+                        <div class="cool-facts-content">
+                            <i class="ion-happy-outline"></i>
+                            <p>de <br> PRECISÃO</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single Cool Fact-->
+                <!-- <div class="col-12 col-md-3 col-lg-3">
+                    <div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="counter-area">
+                            <h3><span class="counter">40</span></h3>
+                        </div>
+                        <div class="cool-facts-content">
+                            <i class="ion-person"></i>
+                            <p>ACTIVE <br>ACCOUNTS</p>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- Single Cool Fact-->
+                <!-- <div class="col-12 col-md-3 col-lg-3">
+                    <div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.8s">
+                        <div class="counter-area">
+                            <h3><span class="counter">10</span></h3>
+                        </div>
+                        <div class="cool-facts-content">
+                            <i class="ion-ios-star-outline"></i>
+                            <p>TOTAL <br>APP RATES</p>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+ <!--        <div class="row mb-5 align-items-center">
+          <div class="col-lg-7 mb-5" data-aos="fade-up" data-aos-delay="100">
+            <img src="images/undraw_youtube_tutorial.svg" alt="Image" class="img-fluid">
+          </div>
+          <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="text-black mb-4">We Are Excellent In Education</h2>
+            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus fugiat quo molestiae illo.</p>
+
+            <div class="d-flex align-items-center custom-icon-wrap mb-3">
+              <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
+              <div><h3 class="m-0">22,931 Yearly Graduates</h3></div>
+            </div>
+
+            <div class="d-flex align-items-center custom-icon-wrap">
+              <span class="custom-icon-inner mr-3"><span class="icon icon-university"></span></span>
+              <div><h3 class="m-0">150 Universities Worldwide</h3></div>
+            </div>
+
+          </div>
+        </div>
+ -->
+<!--         <div class="row mb-5 align-items-center">
+          <div class="col-lg-7 mb-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
+            <img src="images/undraw_teaching.svg" alt="Image" class="img-fluid">
+          </div>
+          <div class="col-lg-4 mr-auto order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="text-black mb-4">Strive for Excellent</h2>
+            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus fugiat quo molestiae illo.</p>
+
+            <div class="d-flex align-items-center custom-icon-wrap mb-3">
+              <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
+              <div><h3 class="m-0">22,931 Yearly Graduates</h3></div>
+            </div>
+
+            <div class="d-flex align-items-center custom-icon-wrap">
+              <span class="custom-icon-inner mr-3"><span class="icon icon-university"></span></span>
+              <div><h3 class="m-0">150 Universities Worldwide</h3></div>
+            </div>
+
+          </div>
+        </div> -->
+
+<!--         <div class="row mb-5 align-items-center">
+          <div class="col-lg-7 mb-5" data-aos="fade-up" data-aos-delay="100">
+            <img src="images/undraw_teacher.svg" alt="Image" class="img-fluid">
+          </div>
+          <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="text-black mb-4">Education is life</h2>
+            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus fugiat quo molestiae illo.</p>
+
+            <div class="d-flex align-items-center custom-icon-wrap mb-3">
+              <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
+              <div><h3 class="m-0">22,931 Yearly Graduates</h3></div>
+            </div>
+
+            <div class="d-flex align-items-center custom-icon-wrap">
+              <span class="custom-icon-inner mr-3"><span class="icon icon-university"></span></span>
+              <div><h3 class="m-0">150 Universities Worldwide</h3></div>
+            </div>
+
+          </div>
+        </div> -->
+
+      </div>
+    </div>
+
+    <div class="site-section bg-image overlay" style="background-image: url('images/books.jpg');"id="suppoters-section">
+      <div class="container">
+
+        <div class="row mb-5 justify-content-center">
+          <div class="col-lg-7 mb-5 text-center"  data-aos="fade-up" data-aos-delay="">
+            <h2 class="section">Apoiadores</h2>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="form-group col">
+            <div class="row justify-content-center align-items-center">
+              <div class="col-md-8 text-center testimony">
+                <img src="images/usp.png" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
+                <h3 class="mb-4">Universidade de São Paulo</h3>
+              </div>
+              <div class="col-md-8 text-center testimony">
+                <img src="images/FAPESP.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
+                <h3 class="mb-4">Fundação de Amparo a Pesquisa</h3>
+              </div>
+            </div>
+          </div>  
+        </div>
+
+      </div>
+    </div>
+
+    <!-- <div class="site-section bg-image overlay" style="background-image: url('images/undraw_teaching.svg');">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-md-8 text-center testimony">
+            <img src="images/usp.png" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
+            <h3 class="mb-4">Universidade de São Paulo</h3>
+          </div>
+          <div class="col-md-8 text-center testimony">
+            <img src="images/FAPESP.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
+            <h3 class="mb-4">Fundação de Amparo a Pesquisa</h3>
+          </div>
+        </div>
+      </div>
+    </div> -->
+<!-- 
+    <div class="site-section pb-0">
+
+      <div class="future-blobs">
+        <div class="blob_2">
+          <img src="images/blob_2.svg" alt="Image">
+        </div>
+        <div class="blob_1">
+          <img src="images/blob_1.svg" alt="Image">
+        </div>
+      </div>
+      <div class="container">
+        <div class="row mb-5 justify-content-center" data-aos="fade-up" data-aos-delay="">
+          <div class="col-lg-7 text-center">
+            <h2 class="section-title">Why Choose Us</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 ml-auto align-self-start"  data-aos="fade-up" data-aos-delay="100">
+
+            <div class="p-4 rounded bg-white why-choose-us-box">
+
+              <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+                <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-graduation-cap"></span></span></div>
+                <div><h3 class="m-0">22,931 Yearly Graduates</h3></div>
+              </div>
+
+              <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+                <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-university"></span></span></div>
+                <div><h3 class="m-0">150 Universities Worldwide</h3></div>
+              </div>
+
+              <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+                <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-graduation-cap"></span></span></div>
+                <div><h3 class="m-0">Top Professionals in The World</h3></div>
+              </div>
+
+              <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+                <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-university"></span></span></div>
+                <div><h3 class="m-0">Expand Your Knowledge</h3></div>
+              </div>
+
+              <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+                <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-graduation-cap"></span></span></div>
+                <div><h3 class="m-0">Best Online Teaching Assistant Courses</h3></div>
+              </div>
+
+              <div class="d-flex align-items-center custom-icon-wrap custom-icon-light">
+                <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-university"></span></span></div>
+                <div><h3 class="m-0">Best Teachers</h3></div>
+              </div>
+
+            </div>
+
+
+          </div>
+          <div class="col-lg-7 align-self-end"  data-aos="fade-left" data-aos-delay="200">
+            <img src="images/person_transparent.png" alt="Image" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+     -->
+     
+    <footer class="footer-section bg-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h3>About OneSchool</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro consectetur ut hic ipsum et veritatis corrupti. Itaque eius soluta optio dolorum temporibus in, atque, quos fugit sunt sit quaerat dicta.</p>
+          </div>
+
+          <div class="col-md-3 ml-auto">
+            <h3>Links</h3>
+            <ul class="list-unstyled footer-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Courses</a></li>
+              <li><a href="#">Programs</a></li>
+              <li><a href="#">Teachers</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-4">
+            <h3>Subscribe</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt incidunt iure iusto architecto? Numquam, natus?</p>
+            <form action="#" class="footer-subscribe">
+              <div class="d-flex mb-5">
+                <input type="text" class="form-control rounded-0" placeholder="Email">
+                <input type="submit" class="btn btn-primary rounded-0" value="Subscribe">
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <div class="border-top pt-5">
+            <p>
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+      </p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
     </footer>
 
-</body>
+  
+    
+  </div> <!-- .site-wrap -->
 
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/jquery.countdown.min.js"></script>
+  <script src="js/bootstrap-datepicker.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.fancybox.min.js"></script>
+  <script src="js/jquery.sticky.js"></script>
 
+  
+  <script src="js/main.js"></script>
+    
+  </body>
 </html>
 
 
 <script>
-    	//Submit data when enter key is pressed
-        // $('#user_name').keydown(function(e) 
-        function submitFunction(){
-            var radios = document.querySelector('input[name="topics"]:checked').value;
-        	var text = $('#user_name').val();
+  //Submit data when enter key is pressed
+    // $('#user_name').keydown(function(e) 
+    function submitFunction(){
+        var radios = document.querySelector('input[name="topics"]:checked').value;
+        var text = $('#user_name').val();
+
+        if (text.length > 0) { //catch Enter key
+            // $('#response').html($.i18n('hello', AntiXSS.sanitizeInput(text))); 
+                
+          //POST request to API to create a new visitor entry in the database
             
-            if (text.length > 0) { //catch Enter key
-            	//POST request to API to create a new visitor entry in the database
-                $.ajax({
-    			  method: "POST",
-    			  url: "./api/visitors",
-    			  contentType: "application/json",
-    			  data: JSON.stringify({text, text, radios: radios})
-    			})
-                .done(function(data) {
-                    // if(data && data.text){
-                    // document.getElementById("response").innerHTML = "Hello World";
-                    $('#response').html($.i18n('hello', AntiXSS.sanitizeInput(data.prediction))); 
-                    // }
-                    // else {
-                    // $('#response').html(AntiXSS.sanitizeInput(data));
-                    // }
-                    // $('#nameInput').hide();
-                    getNames();
-                });
-            }
+
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "./post", true);
+            xhr.responseType = 'application/json';
+            xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+
+            // send the collected data as JSON
+            xhr.send(JSON.stringify({text: text, radios: radios}));
+            document.getElementById("loader_response").style.display = "block";
+            document.getElementById("response").style.display = "none";
+            document.getElementById("button-sub").style.display = "none";
+            
+            
+            // xhr.onloadend = function () {
+            // // done
+            // };
+
+            xhr.onerror = function() {
+              alert("Request failed");
+            };
+
+            xhr.onload = function() {
+              // alert(`Loaded: ${xhr.status} ${xhr.response}`);
+              // $('#response').html($.i18n('hello', AntiXSS.sanitizeInput(xhr.response.prediction)));
+              document.getElementById("loader_response").style.display = "none";
+              document.getElementById("response").style.display = "block";
+              document.getElementById("button-sub").style.display = "block";
+              $('#response').html(`Acreditamos que você tem uma opinião ${xhr.response} com relação ao tema`)
+              
+            };
+
+
+            // $.ajax({
+            //     method: "GET",
+            //     url: "./post",
+            //     contentType: "application/json",
+            //     data: JSON.stringify({text, text, radios: radios})
+            //   })
+
+            // .done(function(data) {
+            //     // if(data && data.text){
+            //     // document.getElementById("response").innerHTML = "Hello World";
+            //     $('#response').html($.i18n('hello', AntiXSS.sanitizeInput(data.prediction))); 
+            //     // }
+            //     // else {
+            //     // $('#response').html(AntiXSS.sanitizeInput(data));
+            //     // }
+            //     // $('#nameInput').hide();
+            //     // getNames();
+            // }
+            // );
         }
+    }
 
-        //Retrieve all the visitors from the database
-        function getNames(){
-          $.get("./api/visitors")
-              .done(function(data) {
-                  if(data.length > 0) {
-                    data.forEach(function(element, index) {
-                      data[index] = AntiXSS.sanitizeInput(element)
-                    });
-                    $('#databaseNames').html($.i18n('database_contents') + JSON.stringify(data));
-                  }
-              });
-          }
+    // //Retrieve all the visitors from the database
+    // function getNames(){
+    //   $.get("./api/visitors")
+    //       .done(function(data) {
+    //           if(data.length > 0) {
+    //             data.forEach(function(element, index) {
+    //               data[index] = AntiXSS.sanitizeInput(element)
+    //             });
+    //             $('#databaseNames').html($.i18n('database_contents') + JSON.stringify(data));
+    //           }
+    //       });
+    //   }
 
-          //Call getNames on page load.
-          getNames();
+    //   //Call getNames on page load.
+    //   getNames();
 
 
-    </script>
+</script>
