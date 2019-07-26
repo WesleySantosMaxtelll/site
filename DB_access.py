@@ -8,12 +8,14 @@ class AcessaBD():
     global cur
 
     def __init__(self):
-        self.conn = psycopg2.connect("dbname='post_storage' user='postgres' password='excelente' host='localhost'")
+        self.conn = psycopg2.connect(dbname='ddp2de2t1mnh7g', user='rxtzanglblvbnm', 
+            password='8e2c520c6abb3a8d10d307ade361e4564eafd85e1abe4bfde35ba2e194630d3b', 
+            host='ec2-50-19-222-129.compute-1.amazonaws.com')
         self.cur = self.conn.cursor()
 
-    def inserir_texto(self, texto, tag):
-        self.cur.execute("insert into textos (texto, tag_user) values (%s, %s)",
-                         (texto, tag))
+    def inserir_texto(self, texto, tag_user, tag_predicted):
+        self.cur.execute("insert into textos (texto, tag_user, tag_predicted) values (%s, %s, %s)",
+                         (texto, tag_user, tag_predicted))
         self.conn.commit()
     #
     # def devolveBuscasRecentesCliente(self, idCliente, N):

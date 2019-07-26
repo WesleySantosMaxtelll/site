@@ -3,6 +3,7 @@ import os, sys
 import threading
 
 from Model import Predicter
+from DB_access import AcessaBD
 # from DB_access import AcessaBD
 
 # label = 'pena'
@@ -13,6 +14,7 @@ from Model import Predicter
 class interface:
     def __init__(self):
         self.p = Predicter.instance()
+        self.db = AcessaBD()
         self.dict = {1:'Contrária', 2:'Favorável'}
 
     def request(self, text, tag):
@@ -23,4 +25,6 @@ class interface:
         else:
             d = self.dict[pred]
         print(d)
+
+        db.inserir_texto(text, 'for', 'others')
         return d
