@@ -13,9 +13,9 @@ class AcessaBD():
             host='ec2-50-19-222-129.compute-1.amazonaws.com')
         self.cur = self.conn.cursor()
 
-    def inserir_texto(self, texto, tag_user, tag_predicted):
-        self.cur.execute("insert into textos (texto, tag_user, tag_predicted) values (%s, %s, %s)",
-                         (texto, tag_user, tag_predicted))
+    def inserir_texto(self, texto, topic, tag_user, tag_predicted):
+        self.cur.execute("insert into textos (texto, topic, tag_user, tag_predicted) values (%s, %s, %s, %s)",
+                         (texto, topic, tag_user, tag_predicted))
         self.conn.commit()
     #
     # def devolveBuscasRecentesCliente(self, idCliente, N):

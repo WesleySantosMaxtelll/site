@@ -26,5 +26,5 @@ class interface:
             d = self.dict[pred]
         print(d)
 
-        self.db.inserir_texto(text, 'for', 'others')
+        self.db.inserir_texto(text, tag, 'for', 'others')
         return d
