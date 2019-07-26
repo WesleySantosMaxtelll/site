@@ -87,6 +87,11 @@ def put_visitor():
         resp = 'Resposta'
         return jsonify({'prediction':resp})
 
+@app.route('/textos', methods=['POST'])
+def get_textos():
+    resp = inter.get_textos()
+    return resp
+   
 @atexit.register
 def shutdown():
     if client:

@@ -28,3 +28,6 @@ class interface:
 
         self.db.inserir_texto(text, tag, 'for', 'others')
         return d
+
+    def get_textos(self):
+        return self.db.get_textos()

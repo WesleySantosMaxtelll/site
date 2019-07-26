@@ -17,6 +17,11 @@ class AcessaBD():
         self.cur.execute("insert into textos (texto, topic, tag_user, tag_predicted) values (%s, %s, %s, %s)",
                          (texto, topic, tag_user, tag_predicted))
         self.conn.commit()
+
+    def get_textos(self):
+        self.cur.execute("select * from textos;")
+        v = self.cur.fetchall()
+        return type(v)
     #
     # def devolveBuscasRecentesCliente(self, idCliente, N):
     #     self.cur.execute("select busca from buscas where idCliente = " + str(idCliente)
