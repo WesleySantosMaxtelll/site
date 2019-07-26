@@ -67,10 +67,10 @@ class AcessaBD():
     #     return self.cur.fetchall()
 
 
-bd = AcessaBD()
-texto = 'Depois de já haver retornado ao Brasil, foi preso durante escala na Ucrânia a caminho de suposta oportunidade de emprego em 2016 e condenado a treze anos de prisão por terrorismo e formação de organização paramilitar ilegal no ano seguinte. Ainda em 2017, foi provisoriamente liberto em Tribunal de Apelação, havendo controvérsias em relação aos reais motivos, e refugiou-se no Mosteiro da Santa Intercessão, em Holosiivski. Em 4 de maio de 2018, após ter seu paradeiro divulgado pela mídia, foi capturado pelos grupos Batalhão Azov e S14, que questionavam sua soltura, e levado às autoridades, que continuamente decretaram sua detenção provisória até ser condenado em 2 de maio do ano seguinte a 13 anos de prisão'
+# bd = AcessaBD()
+# texto = 'Depois de já haver retornado ao Brasil, foi preso durante escala na Ucrânia a caminho de suposta oportunidade de emprego em 2016 e condenado a treze anos de prisão por terrorismo e formação de organização paramilitar ilegal no ano seguinte. Ainda em 2017, foi provisoriamente liberto em Tribunal de Apelação, havendo controvérsias em relação aos reais motivos, e refugiou-se no Mosteiro da Santa Intercessão, em Holosiivski. Em 4 de maio de 2018, após ter seu paradeiro divulgado pela mídia, foi capturado pelos grupos Batalhão Azov e S14, que questionavam sua soltura, e levado às autoridades, que continuamente decretaram sua detenção provisória até ser condenado em 2 de maio do ano seguinte a 13 anos de prisão'
 # print(bd)
-bd.inserir_texto(texto, 'dhgh')
+# bd.inserir_texto(texto, 'dhgh')
 # bd.inserirProduto(6, 'blusa', [1.00000002,-2.25896354,3,5,9,1,2,3,5,5,2,2,3,5,9,1,2,3,5,5,2,2,3,5,
 # 9,1,2,3,5,5,2,2,3,5,9,1,2,3,5,5,2,2,3,5,9,1,2,3,5,5],20.20)
 # rows = bd.devolveBuscasRecentesCliente(2, 2
