@@ -104,7 +104,7 @@ def save_text():
 @app.route('/textos', methods=['GET'])
 def get_textos():
     resp = inter.get_textos()
-    resp = {1:'a', 2:'b', 3:'c'}
+    # resp = {1:'a', 2:'b', 3:'c'}
     return jsonify(resp)
    
 @atexit.register
