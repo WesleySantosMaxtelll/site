@@ -26,8 +26,11 @@ class interface:
             d = self.dict[pred]
         print(d)
 
-        self.db.inserir_texto(text, tag, 'for', 'others')
+        # self.db.inserir_texto(text, tag, 'for', 'others')
         return d
 
     def get_textos(self):
         return self.db.get_textos()
+
+    def save_text(self, text, tag, predicted, ans):
+        self.db.inserir_texto(text, tag, ans, predicted)

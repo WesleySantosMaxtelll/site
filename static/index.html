@@ -3,24 +3,8 @@
   <head>
     <meta charset="utf-8">
     <script src="antixss.js" type="text/javascript"></script>
-    <script>
-        $( document ).ready(function() {
-            $.i18n().load( {
-                en: {
-                    "what_is_your_name": "What is your name?",
-                    "what_is_your_opinion": "Escreva sua opinião abaixo",
-                    "apoio": "Este projeto tem o apoio da Fapesp",
-                    "select_topic": "Selecione o tópico",
-                    "hello": "Acreditamos que você tem uma opinião ao tema"
-                },
-            } );
-            $('body').i18n();
-            // $('#user_name').attr("placeholder", $.i18n('O que pensa sobre o tópico escolhido?') );
-        });
-        </script>
 
-
-
+    <link rel="stylesheet" href="css/really-simple-jquery-dialog.css">
     <title>Stance Predictor &mdash; Website by Colorlib</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -85,7 +69,8 @@
       </style>
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-  
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/really-simple-jquery-dialog.js"></script>
   <div class="site-wrap">
 
     <div class="site-mobile-menu site-navbar-target">
@@ -158,8 +143,8 @@
 
             <div class="form-group row">
                 <div class="col-md-6 mb-3 mb-lg-0">
-                  <h3 class="h4 text-black mb-4">Selecione um dos tópicos abaixo</h3>
-                    <div class="form-group">
+                  <h3 id="texto_selecao" class="h4 text-black mb-4">Selecione um dos tópicos abaixo</h3>
+                    <div id="topic-cont" class="form-group">
                       
                       <p id="topic" class="lead" data-i18n="select_topic"></p>
                         <input type="radio" name="topics" value="aborto"> Descriminalização do Aborto<br>
@@ -172,13 +157,30 @@
 
                       <!-- <input type="text" class="form-control" placeholder="Email Addresss"> -->
 
-                        <p id="response" class="lead text-center"></p>
 
                         <div id="loader_response" style="display:none;" class="row">
                             
                             <div class="loader"></div>
                             <p class="lead text-center">Estamos processando. Por favor aguarde</p>
                         </div>
+                    </div>
+
+                    <div id="wait_ans" style="display:none;" class="form-group">
+                    <p id="response" class="h4 text-black text-center mb-4"></p>
+                    <h3 class="lead text-black">Qual era sua real opinião?</h3>
+
+                      <p id="resposta_escritor"  class="lead" data-i18n="select_topic"></p>
+                        <input type="radio" name="rps" value="others"> Sem Posicionamento<br>
+                        <input type="radio" name="rps" value="against"> Contrária<br>
+                        <input type="radio" name="rps" value="for"> Favorável<br><br><br>
+                         
+                      <!-- <p class="lead" data-i18n="what_is_your_opinion"></p> -->
+
+                      <!-- <input type="text" class="form-control" placeholder="Email Addresss"> -->
+                      <!-- <input id="button-send-ans" type="button" class="btn btn-primary py-7 px-5 btn-block btn-pill" value="Enviar Resposta"> -->
+
+                      <p id="button-send-ans" onclick="sendAnsFunction()" data-aos="fade-up" data-aos-delay="300"><a href="#predictor-section" class="btn btn-primary py-3 px-5 btn-pill">Enviar Resposta</a></p>
+
                     </div>
                 </div>
 
@@ -545,7 +547,6 @@
 
   
   <script src="js/main.js"></script>
-    
   </body>
 </html>
 
@@ -553,11 +554,64 @@
 <script>
   //Submit data when enter key is pressed
     // $('#user_name').keydown(function(e) 
-    function submitFunction(){
-        var radios = document.querySelector('input[name="topics"]:checked').value;
-        var text = $('#user_name').val();
+    var text = "";
+    var radios = "";
+    var model_ans = "";
 
-        if (text.length > 0) { //catch Enter key
+    function sendAnsFunction(){
+        // alert(text);
+        var resp_radios = document.querySelector('input[name="rps"]:checked').value;
+        $('input[name="rps"]').prop('checked', false);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "./save", true);
+        xhr.responseType = 'application/json';
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+
+        // send the collected data as JSON
+        xhr.send(JSON.stringify({text: text, radios: radios, model_ans:model_ans, resp_radios:resp_radios}));
+        
+        document.getElementById("loader_response").style.display = "block";
+        // document.getElementById("wait").style.display = "none";
+        // document.getElementById("button-sub").style.display = "none";
+        
+        
+        // xhr.onloadend = function () {
+        // // done
+        // };
+
+        xhr.onerror = function() {
+          document.getElementById("loader_response").style.display = "block";
+          document.getElementById("topic-cont").style.display = "block";
+          document.getElementById("texto_selecao").style.display = "block";
+          document.getElementById("wait_ans").style.display = "none";
+          document.getElementById("button-sub").style.display = "block";
+          alert("Request failed");
+
+        };
+
+        xhr.onload = function() {
+          // alert(`Loaded: ${xhr.status} ${xhr.response}`);
+          // $('#response').html($.i18n('hello', AntiXSS.sanitizeInput(xhr.response.prediction)));
+          document.getElementById("loader_response").style.display = "none";
+          document.getElementById("topic-cont").style.display = "block";
+          document.getElementById("texto_selecao").style.display = "block";
+          document.getElementById("wait_ans").style.display = "none";
+          document.getElementById("button-sub").style.display = "block";
+          // document.getElementById("button-sub").style.display = "block";
+          // alert(text);
+          
+        };
+
+
+
+    }
+
+    function submitFunction(){
+        radios = document.querySelector('input[name="topics"]:checked').value;
+        text = $('#user_name').val();
+
+        if (text.length > 0 && radios.length > 0) { //catch Enter key
             // $('#response').html($.i18n('hello', AntiXSS.sanitizeInput(text))); 
                 
           //POST request to API to create a new visitor entry in the database
@@ -572,7 +626,7 @@
             // send the collected data as JSON
             xhr.send(JSON.stringify({text: text, radios: radios}));
             document.getElementById("loader_response").style.display = "block";
-            document.getElementById("response").style.display = "none";
+            // document.getElementById("wait").style.display = "none";
             document.getElementById("button-sub").style.display = "none";
             
             
@@ -581,16 +635,23 @@
             // };
 
             xhr.onerror = function() {
+              document.getElementById("loader_response").style.display = "none";
+              document.getElementById("button-sub").style.display = "block";
               alert("Request failed");
+
             };
 
             xhr.onload = function() {
               // alert(`Loaded: ${xhr.status} ${xhr.response}`);
               // $('#response').html($.i18n('hello', AntiXSS.sanitizeInput(xhr.response.prediction)));
               document.getElementById("loader_response").style.display = "none";
-              document.getElementById("response").style.display = "block";
-              document.getElementById("button-sub").style.display = "block";
+              document.getElementById("topic-cont").style.display = "none";
+              document.getElementById("texto_selecao").style.display = "none";
+              document.getElementById("wait_ans").style.display = "block";
+              // document.getElementById("button-sub").style.display = "block";
+              model_ans = xhr.response
               $('#response').html(`Acreditamos que você tem uma opinião ${xhr.response} com relação ao tema`)
+
               
             };
 

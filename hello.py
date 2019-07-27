@@ -77,10 +77,24 @@ def put_visitor():
         topic = request.json['radios']
         text = request.json['text']
         resp = inter.request(text, topic)
-        # return {'prediction':'Teste'}
-        # print(resp)
-        # resp = 'Resposta'
         return resp
+        # return jsonify({'prediction':resp})
+
+    else:
+        resp = 'Resposta'
+        return jsonify({'prediction':resp})
+
+
+@app.route('/save', methods=['POST', 'GET'])
+def save_text():
+
+    if request.method == 'POST':
+        print(request.json)
+        # topic = request.json['radios']
+        # text = request.json['text']
+        inter.save_text(request.json['text'], request.json['radios'], request.json['resp_radios'],
+            request.json['model_ans'])
+        return 'done'
         # return jsonify({'prediction':resp})
 
     else:
