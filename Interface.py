@@ -16,6 +16,7 @@ class interface:
         self.p = Predicter.instance()
         self.db = AcessaBD()
         self.dict = {1:'Contrária', 2:'Favorável'}
+        self.dict_p = {'Contrária':"against", 'Favorável':"for":, 'Sem Posicionamento':"others"}
 
     def request(self, text, tag):
         cat, pred = self.p.predict_text_stance(tag, text)
@@ -33,4 +34,4 @@ class interface:
         return self.db.get_textos()
 
     def save_text(self, text, tag, predicted, ans):
-        self.db.inserir_texto(text, tag, ans, predicted)
+        self.db.inserir_texto(text, tag, ans, self.dict_p[predicted])
