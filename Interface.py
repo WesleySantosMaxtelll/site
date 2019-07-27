@@ -33,5 +33,6 @@ class interface:
     def get_textos(self):
         return self.db.get_textos()
 
-    def save_text(self, text, tag, predicted, ans):
+    def save_text(self, text, tag, ans, predicted):
+        print(predicted)
         self.db.inserir_texto(text, tag, ans, self.dict_p[predicted])
