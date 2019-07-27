@@ -561,7 +561,6 @@
     function sendAnsFunction(){
         // alert(text);
         var resp_radios = document.querySelector('input[name="rps"]:checked').value;
-        $('input[name="rps"]').prop('checked', false);
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "./save", true);
@@ -570,7 +569,7 @@
 
         // send the collected data as JSON
         xhr.send(JSON.stringify({text: text, radios: radios, model_ans:model_ans, resp_radios:resp_radios}));
-        
+
         document.getElementById("loader_response").style.display = "block";
         // document.getElementById("wait").style.display = "none";
         // document.getElementById("button-sub").style.display = "none";
@@ -581,6 +580,7 @@
         // };
 
         xhr.onerror = function() {
+            $('input[name="rps"]').prop('checked', false);
           document.getElementById("loader_response").style.display = "block";
           document.getElementById("topic-cont").style.display = "block";
           document.getElementById("texto_selecao").style.display = "block";
@@ -592,6 +592,7 @@
 
         xhr.onload = function() {
           // alert(`Loaded: ${xhr.status} ${xhr.response}`);
+            $('input[name="rps"]').prop('checked', false);
           // $('#response').html($.i18n('hello', AntiXSS.sanitizeInput(xhr.response.prediction)));
           document.getElementById("loader_response").style.display = "none";
           document.getElementById("topic-cont").style.display = "block";

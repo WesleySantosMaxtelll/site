@@ -16,7 +16,7 @@ class interface:
         self.p = Predicter.instance()
         self.db = AcessaBD()
         self.dict = {1:'Contrária', 2:'Favorável'}
-        self.dict_p = {'Contrária':"against", 'Favorável':"for":, 'Sem Posicionamento':"others"}
+        self.dict_p = {'Contrária':"against", 'Favorável':"for", 'Sem Posicionamento':"others"}
 
     def request(self, text, tag):
         cat, pred = self.p.predict_text_stance(tag, text)
