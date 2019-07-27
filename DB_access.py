@@ -20,8 +20,8 @@ class AcessaBD():
 
     def get_textos(self):
         self.cur.execute("select * from textos;")
-        v = self.cur.fetchall()
-        return type(v)
+        return self.cur.fetchall()
+        # return type(v)
     #
     # def devolveBuscasRecentesCliente(self, idCliente, N):
     #     self.cur.execute("select busca from buscas where idCliente = " + str(idCliente)

@@ -96,15 +96,16 @@ def save_text():
             request.json['model_ans'])
         return 'done'
         # return jsonify({'prediction':resp})
+    return ''
+    # else:
+    #     resp = 'Resposta'
+    #     return jsonify({'prediction':resp})
 
-    else:
-        resp = 'Resposta'
-        return jsonify({'prediction':resp})
-
-@app.route('/textos', methods=['POST'])
+@app.route('/textos', methods=['GET'])
 def get_textos():
     resp = inter.get_textos()
-    return resp
+    resp = {1:'a', 2:'b', 3:'c'}
+    return jsonify(resp)
    
 @atexit.register
 def shutdown():
