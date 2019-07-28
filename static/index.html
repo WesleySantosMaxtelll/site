@@ -166,7 +166,12 @@
                     </div>
 
                     <div id="wait_ans" style="display:none;" class="form-group">
-                    <p id="response" class="h4 text-black text-center mb-4"></p>
+                    <p id="response" class="h4 text-black text-center mb-4">
+                          Acreditamos que você tenha uma opinião  
+                          <span id="text-response" style="color: #e0ad70"></span>
+                          com relação ao tema
+                    </p>
+                    <!-- <p id="response" class="h4 text-black text-center mb-4"></p> -->
                     <h3 class="lead text-black">Qual era sua real opinião?</h3>
 
                       <p id="resposta_escritor"  class="lead" data-i18n="select_topic"></p>
@@ -649,9 +654,23 @@
               document.getElementById("topic-cont").style.display = "none";
               document.getElementById("texto_selecao").style.display = "none";
               document.getElementById("wait_ans").style.display = "block";
+              document.getElementById("response").style.display = "block";
               // document.getElementById("button-sub").style.display = "block";
               model_ans = xhr.response
-              $('#response').html(`Acreditamos que você tem uma opinião ${xhr.response} com relação ao tema`)
+              if (model_ans == 'Favorável') {
+                document.getElementById("text-response").style.color = "#45a332";  
+              } 
+
+              if (model_ans == 'Contrária') {
+                document.getElementById("text-response").style.color = "#ff5c53";  
+              }
+              if (model_ans == 'Sem Posicionamento') {
+                document.getElementById("text-response").style.color = "#643ea1";  
+              }
+
+              // document.getElementById("text-response").style.color = "#00ff00";
+              $('#text-response').html(xhr.response)
+              // style="color: #ff0000"
 
               
             };
