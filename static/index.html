@@ -178,11 +178,11 @@
                           com relação ao tema
                     </p>
                     <!-- <p id="response" class="h4 text-black text-center mb-4"></p> -->
-                    <h3 class="lead text-black">Por favor ajude-nos a melhorar o sistema. A resposta acima estava correta</h3>
+                    <h3 class="lead text-black">Por favor ajude-nos a melhorar o sistema. A resposta acima estava correta?</h3>
 
                       <p id="resposta_escritor"  class="lead" data-i18n="select_topic"></p>
                         <input type="radio" name="rps" value="s"> Sim<br>
-                        <input type="radio" name="rps" value="n"> Não<br>
+                        <input type="radio" name="rps" value="n"> Não<br><br>
                          
                       <!-- <p class="lead" data-i18n="what_is_your_opinion"></p> -->
 
@@ -590,7 +590,6 @@
         // };
 
         xhr.onerror = function() {
-            $('input[name="rps"]').prop('checked', false);
           document.getElementById("loader_response").style.display = "block";
           document.getElementById("topic-cont").style.display = "block";
           document.getElementById("texto_selecao").style.display = "block";
@@ -653,31 +652,32 @@
             };
 
             xhr.onload = function() {
-              // alert(`Loaded: ${xhr.status} ${xhr.response}`);
-              // $('#response').html($.i18n('hello', AntiXSS.sanitizeInput(xhr.response.prediction)));
-              document.getElementById("loader_response").style.display = "none";
-              document.getElementById("topic-cont").style.display = "none";
-              document.getElementById("texto_selecao").style.display = "none";
-              document.getElementById("wait_ans").style.display = "block";
-              document.getElementById("response").style.display = "block";
-              // document.getElementById("button-sub").style.display = "block";
-              model_ans = xhr.response
-              if (model_ans == 'Favorável') {
-                document.getElementById("text-response").style.color = "#45a332";  
-              } 
+                $('input[name="rps"]').prop('checked', false);
+                // alert(`Loaded: ${xhr.status} ${xhr.response}`);
+                  // $('#response').html($.i18n('hello', AntiXSS.sanitizeInput(xhr.response.prediction)));
+                  document.getElementById("loader_response").style.display = "none";
+                  document.getElementById("topic-cont").style.display = "none";
+                  document.getElementById("texto_selecao").style.display = "none";
+                  document.getElementById("wait_ans").style.display = "block";
+                  document.getElementById("response").style.display = "block";
+                  // document.getElementById("button-sub").style.display = "block";
+                  model_ans = xhr.response
+                  if (model_ans == 'Favorável') {
+                    document.getElementById("text-response").style.color = "#45a332";  
+                  } 
 
-              if (model_ans == 'Contrária') {
-                document.getElementById("text-response").style.color = "#ff5c53";  
-              }
-              if (model_ans == 'Sem Posicionamento') {
-                document.getElementById("text-response").style.color = "#643ea1";  
-              }
+                  if (model_ans == 'Contrária') {
+                    document.getElementById("text-response").style.color = "#ff5c53";  
+                  }
+                  if (model_ans == 'Sem Posicionamento') {
+                    document.getElementById("text-response").style.color = "#643ea1";  
+                  }
 
-              // document.getElementById("text-response").style.color = "#00ff00";
-              $('#text-response').html(xhr.response)
-              // style="color: #ff0000"
+                  // document.getElementById("text-response").style.color = "#00ff00";
+                  $('#text-response').html(xhr.response)
+                  // style="color: #ff0000"
 
-              
+                  
             };
 
 
