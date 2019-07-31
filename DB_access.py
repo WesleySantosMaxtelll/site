@@ -14,6 +14,8 @@ class AcessaBD():
         self.cur = self.conn.cursor()
 
     def inserir_texto(self, texto, topic, tag_user, tag_predicted):
+        print('texto: {}\n\n topico: {} \n\n usuario: {} \n\n modelo: {}'.format(texto, topic, tag_user, tag_predicted))
+
         self.cur.execute("insert into textos (texto, topic, tag_user, tag_predicted) values (%s, %s, %s, %s)",
                          (texto, topic, tag_user, tag_predicted))
         self.conn.commit()
