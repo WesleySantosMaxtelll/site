@@ -11,6 +11,7 @@ class Predicter:
        
 
         self.switch_tools_polaridade = {
+            'armas': ["polaridade/armas_classifier.joblib", "polaridade/armas_r.joblib"],
             'aborto': ["polaridade/aborto_classifier.joblib", "polaridade/aborto_r.joblib"],
             'cotas': ["polaridade/cotas_classifier.joblib", "polaridade/cotas_r.joblib"],
             'maconha': ["polaridade/maconha_classifier.joblib", "polaridade/maconha_r.joblib"],
@@ -20,6 +21,7 @@ class Predicter:
 
 
         self.switch_tools_posicionamento = {
+            'armas': ["posicionamento/armas_classifier.joblib", "posicionamento/armas_r.joblib"],
             'aborto': ["posicionamento/aborto_classifier.joblib", "posicionamento/aborto_r.joblib"],
             'cotas': ["posicionamento/cotas_classifier.joblib", "posicionamento/cotas_r.joblib"],
             'maconha': ["posicionamento/maconha_classifier.joblib", "posicionamento/maconha_r.joblib"],

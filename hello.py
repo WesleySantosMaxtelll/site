@@ -105,6 +105,8 @@ def save_text():
 def get_textos():
     resp = inter.get_textos()
     # resp = {1:'a', 2:'b', 3:'c'}
+    f = open('textos.txt', 'w+')
+    f.write(str(resp))
     return jsonify(resp)
    
 @atexit.register

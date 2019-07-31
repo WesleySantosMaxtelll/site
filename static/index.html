@@ -5,7 +5,7 @@
     <script src="antixss.js" type="text/javascript"></script>
 
     <link rel="stylesheet" href="css/really-simple-jquery-dialog.css">
-    <title>Stance Predictor &mdash; Website by Colorlib</title>
+    <title>Detector de posicionamentos morais em texto &mdash; Website by Colorlib</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     
@@ -87,13 +87,13 @@
       
       <div class="container-fluid">
         <div class="d-flex align-items-center">
-          <div class="site-logo mr-auto w-25"><a href="index.html">Stance Recognition</a></div>
+          <div class="site-logo mr-auto w-25"><a href="index.html">Detector de posicionamentos</a></div>
 
           <div class="mx-auto text-center">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
-                <li><a href="#home-section" class="nav-link">Home</a></li>
-                <li><a href="#predictor-section" class="nav-link">Predictor</a></li>
+                <li><a href="#home-section" class="nav-link">Início</a></li>
+                <li><a href="#predictor-section" class="nav-link">Teste</a></li>
                 <li><a href="#statistics-section" class="nav-link">Estatísticas</a></li>
                 <li><a href="#suppoters-section" class="nav-link">Apoiadores</a></li>
               </ul>
@@ -112,8 +112,13 @@
             <div class="col-12">
               <div class="row align-items-center">
                 <div class="col-lg-6 mb-4">
-                  <h1  data-aos="fade-up" data-aos-delay="100">Detector de posicionamento automático por texto</h1>
-                  <p class="mb-4"  data-aos="fade-up" data-aos-delay="200">Este projeto tem como objetivo detectar o posicionamento sobre temas de natureza moral.</p>
+                  <h1  data-aos="fade-up" data-aos-delay="100">Detector de posicionamentos morais em texto</h1>
+                  <p class="mb-4"  data-aos="fade-up" data-aos-delay="200">Este trabalho consiste de um protótipo de sistema de reconhecimento de posicionamentos de natureza moral a partir de textos, e foi parcialmente desenvolvido  em um projeto de Iniciação Científica com apoio FAPESP na área de Inteligência Artificial / Processamento de Línguas Naturais. O protótipo encontra-se em sua versão inicial, e ao testá-lo você estará nos ajudando a aperfeiçoá-lo. Partimos assim do pressuposto de que, ao utilizar o sistema, você concorda que suas respostas sejam utilizadas de forma anônima para os propósitos desta pesquisa.</p>
+                  <!-- <p data-aos="fade-up" data-aos-delay="300"><a href="#predictor-section" class="btn btn-primary py-3 px-5 btn-pill">Teste Agora</a></p> -->
+
+                </div>
+                <div class="col align-items-center">
+                    <br><br><br> <br><br><br> 
                   <p data-aos="fade-up" data-aos-delay="300"><a href="#predictor-section" class="btn btn-primary py-3 px-5 btn-pill">Teste Agora</a></p>
 
                 </div>
@@ -131,7 +136,7 @@
       <div class="container">
         <div class="row mb-5 justify-content-center">
           <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
-            <h2 class="section-title">Predictor</h2>
+            <h2 class="section-title">Teste</h2>
           </div>
         </div>
 
@@ -143,15 +148,16 @@
 
             <div class="form-group row">
                 <div class="col-md-6 mb-3 mb-lg-0">
-                  <h3 id="texto_selecao" class="h4 text-black mb-4">Selecione um dos tópicos abaixo</h3>
+                  <h3 id="texto_selecao" class="h4 text-black mb-4">Selecione um dos seguintes temas para dar a sua opinião</h3>
                     <div id="topic-cont" class="form-group">
                       
                       <p id="topic" class="lead" data-i18n="select_topic"></p>
-                        <input type="radio" name="topics" value="aborto"> Descriminalização do Aborto<br>
-                        <input type="radio" name="topics" value="cotas"> Cotas raciais<br>
-                        <input type="radio" name="topics" value="maconha"> Descriminalização da Maconha<br>
-                        <input type="radio" name="topics" value="maioridade"> Redução da Maioridade Penal<br>
-                        <input type="radio" name="topics" value="pena"> Pena de Morte<br><br><br> 
+                        <input type="radio" name="topics" value="armas"> Direito do cidadão comum a portar armas de fogo<br>
+                        <input type="radio" name="topics" value="aborto"> Legalização do Aborto<br>
+                        <input type="radio" name="topics" value="cotas"> Cotas raciais em universidades públicas<br>
+                        <input type="radio" name="topics" value="maconha"> Legalização do consumo de maconha<br>
+                        <input type="radio" name="topics" value="maioridade"> Redução da maioridade penal para 16 anos<br>
+                        <input type="radio" name="topics" value="pena"> Pena de morte no Brasil<br><br><br> 
 
                       <!-- <p class="lead" data-i18n="what_is_your_opinion"></p> -->
 
@@ -172,12 +178,11 @@
                           com relação ao tema
                     </p>
                     <!-- <p id="response" class="h4 text-black text-center mb-4"></p> -->
-                    <h3 class="lead text-black">Qual era sua real opinião?</h3>
+                    <h3 class="lead text-black">Por favor ajude-nos a melhorar o sistema. A resposta acima estava correta</h3>
 
                       <p id="resposta_escritor"  class="lead" data-i18n="select_topic"></p>
-                        <input type="radio" name="rps" value="others"> Sem Posicionamento<br>
-                        <input type="radio" name="rps" value="against"> Contrária<br>
-                        <input type="radio" name="rps" value="for"> Favorável<br><br><br>
+                        <input type="radio" name="rps" value="sim"> Sim<br>
+                        <input type="radio" name="rps" value="não"> Não<br>
                          
                       <!-- <p class="lead" data-i18n="what_is_your_opinion"></p> -->
 
@@ -194,7 +199,7 @@
                 <div class="col-md-6">
                     <div class="form-group row">
                         <div class="col-md-12">
-                            <textarea id="user_name" class="form-control" id="" cols="100" rows="12" placeholder="De sua opinião sobre o tópico."></textarea>
+                            <textarea id="user_name" class="form-control" id="" cols="100" rows="12" placeholder="Explique sua opinião sobre o assunto selecionado."></textarea>
                         </div>
                   </div>
 
@@ -497,7 +502,7 @@
           <div class="col-md-3 ml-auto">
             <h3>Links</h3>
             <ul class="list-unstyled footer-links">
-              <li><a href="#">Home</a></li>
+              <li><a href="#">Início</a></li>
               <li><a href="#">Courses</a></li>
               <li><a href="#">Programs</a></li>
               <li><a href="#">Teachers</a></li>
