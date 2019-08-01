@@ -8,17 +8,19 @@ class AcessaBD():
     global cur
 
     def __init__(self):
-        self.conn = psycopg2.connect(dbname='ddp2de2t1mnh7g', user='rxtzanglblvbnm', 
-            password='8e2c520c6abb3a8d10d307ade361e4564eafd85e1abe4bfde35ba2e194630d3b', 
-            host='ec2-50-19-222-129.compute-1.amazonaws.com')
+        self.conn = psycopg2.connect(dbname='d80l1arfr9pbu0', user='fvekxlyhamhrti', 
+            password='9ec102bbc7ece1f9ce592aa5e12fdfa21121699593dd8cc7d34958b224f6b86c', 
+            host='ec2-54-221-244-70.compute-1.amazonaws.com')
         self.cur = self.conn.cursor()
 
     def inserir_texto(self, texto, topic, tag_user, tag_predicted):
         print('texto: {}\n\n topico: {} \n\n usuario: {} \n\n modelo: {}'.format(texto, topic, tag_user, tag_predicted))
-
-        self.cur.execute("insert into textos (texto, topic, tag_predicted, tag_user) values (%s, %s, %s, %s)",
+        try:
+            self.cur.execute("insert into textos (texto, topic, tag_predicted, tag_user) values (%s, %s, %s, %s)",
                          (texto, topic, tag_predicted, tag_user))
-        self.conn.commit()
+            self.conn.commit()
+        except:
+            self.conn.rollback()
 
     def get_textos(self):
         self.cur.execute("select * from textos;")
