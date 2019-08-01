@@ -1,9 +1,10 @@
 from cloudant import Cloudant
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 from Interface import interface
 import atexit
 import os
 import json
+import csv
 
 app = Flask(__name__, static_url_path='')
 
@@ -119,10 +120,23 @@ def get_statistics():
 @app.route('/textos', methods=['GET'])
 def get_textos():
     resp = inter.get_textos()
+
+    with open('outputs/textos.csv', mode='w') as f:
+        f_writer = csv.writer(f, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+        f_writer.writerow(['id','tópico', 'texto', 'modelo resposta', 'acertou'])
+        for i in resp:
+            print(i)
+            f_writer.writerow(i)
+
+    return send_file('outputs/textos.csv',
+                     mimetype='text/csv',
+                     attachment_filename='Adjacency.csv',
+                     as_attachment=True)
     # resp = {1:'a', 2:'b', 3:'c'}
-    f = open('textos.txt', 'w+')
-    f.write(str(resp))
-    return jsonify(resp)
+    # f = open('textos.txt', 'w+')
+    # f.write(str(resp))
+    # return jsonify(resp)
    
 @atexit.register
 def shutdown():
