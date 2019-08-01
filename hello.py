@@ -117,7 +117,7 @@ def get_statistics():
 
 
 
-@app.route('/textos', methods=['GET'])
+@app.route('/at2kshtqm8l5ffe3mdylhrgerhqqetx6dcijhd0agwuz62mwwx', methods=['GET'])
 def get_textos():
     if not os.path.exists('./outputs'):
         os.makedirs('./outputs')
