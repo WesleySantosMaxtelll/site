@@ -103,7 +103,7 @@ def save_text():
 @app.route('/statistics', methods=['GET'])
 def get_statistics():
     t, p = inter.statiscts()
-    return jsonify({"prec":'{}%'.format(int(p[0][0])), "cont":t})
+    return jsonify({"prec":'{}%'.format(int(100*p[0][0])), "cont":t})
     # else:
     #     resp = 'Resposta'
     #     return jsonify({'prediction':resp})
