@@ -108,7 +108,7 @@ def get_statistics():
     print(p)
     print(mp)
     if t[0][0] > 5:
-        return jsonify({"prec":'{}%'.format(int(100*p[0][0])), "cont":t[0][0], "mp":mp.capitalize()})
+        return jsonify({"prec":'{}%'.format(int(100*p[0][0])), "cont":t[0][0], "mp":(mp.capitalize()+' ')})
     else:
         return jsonify({"prec":'{}%'.format('-'), "cont":t, "mp":'-'})
     #     resp = 'Resposta'
