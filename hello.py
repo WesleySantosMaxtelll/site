@@ -119,7 +119,11 @@ def get_statistics():
 
 @app.route('/textos', methods=['GET'])
 def get_textos():
+    if not os.path.exists('./outputs'):
+        os.makedirs('./outputs')
     resp = inter.get_textos()
+    # resp = [[1, 'aborto', 'Eu sou contra', 'for', 'n'], [2, 'aborto', 'Favoravel demais', 'for', 's'], [3, 'cotas', 'Eu sou contra', 'neutral', 's'], [4, 'maconha', 'Eu sou contra', 'for', 'n']]
+
 
     with open('./outputs/textos.csv', mode='w+') as f:
         f_writer = csv.writer(f, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
