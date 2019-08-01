@@ -113,6 +113,7 @@
               <div class="row align-items-center">
                 <div class="col-lg-6 mb-4">
                   <h1  data-aos="fade-up" data-aos-delay="100">Detector de posicionamentos morais em texto</h1>
+                  <p class="mb-4"  data-aos="fade-up" data-aos-delay="200">Criado por Wesley Ramos dos Santos</p>
                   <p class="mb-4"  data-aos="fade-up" data-aos-delay="200">Este trabalho consiste de um protótipo de sistema de reconhecimento de posicionamentos de natureza moral a partir de textos, e foi parcialmente desenvolvido  em um projeto de Iniciação Científica com apoio FAPESP na área de Inteligência Artificial / Processamento de Línguas Naturais. O protótipo encontra-se em sua versão inicial, e ao testá-lo você estará nos ajudando a aperfeiçoá-lo. Partimos assim do pressuposto de que, ao utilizar o sistema, você concorda que suas respostas sejam utilizadas de forma anônima para os propósitos desta pesquisa.</p>
                   <!-- <p data-aos="fade-up" data-aos-delay="300"><a href="#predictor-section" class="btn btn-primary py-3 px-5 btn-pill">Teste Agora</a></p> -->
 
@@ -262,7 +263,7 @@
         <div class="row mb-5 justify-content-center">
           <div class="col-lg-7 text-center"  data-aos="fade-up" data-aos-delay="">
             <h2 class="section-title">Estatísticas</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam repellat aut neque! Doloribus sunt non aut reiciendis, vel recusandae obcaecati hic dicta repudiandae in quas quibusdam ullam, illum sed veniam!</p>
+            <p>O projeto tem como objetivo colocar a prova os modelos desenvolvidos, além de coletar mais dados para melhorar suas estatísticas. Até o momento conseguimos:</p>
           </div>
            <!-- <div class="loader"></div> -->
         </div>
@@ -302,7 +303,7 @@
                         </div>
                         <div class="cool-facts-content">
                             <i class="ion-happy-outline"></i>
-                            <p>é o tópico <br> MAIS POPULAR</p>
+                            <p> é o tópico <br> MAIS POPULAR</p>
                         </div>
                     </div>
                 </div>
@@ -413,11 +414,11 @@
             <div class="row justify-content-center align-items-center">
               <div class="col-md-8 text-center testimony">
                 <img src="images/usp.png" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
-                <h3 class="mb-4">Universidade de São Paulo</h3>
+                <h3 class="mb-4">Pro-reitoria de Pesquisa da Universidade de São Paulo</h3>
               </div>
               <div class="col-md-8 text-center testimony">
                 <img src="images/FAPESP.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
-                <h3 class="mb-4">Fundação de Amparo a Pesquisa</h3>
+                <h3 class="mb-4">Fundação de Amparo a Pesquisa - Processo (2017/06828-1)</h3>
               </div>
             </div>
           </div>  
@@ -575,7 +576,7 @@
 
 
 <script>
-  //Submit data when enter key is pressed
+    //Submit data when enter key is pressed
     // $('#user_name').keydown(function(e) 
     var text = "";
     var radios = "";
@@ -735,7 +736,7 @@
         };
 
         xhr.onload = function() {
-            alert(xhr.response)
+            // alert(xhr.response)
             $('#contador-testes').html(JSON.parse(xhr.response).cont)
             $('#precisao').html(JSON.parse(xhr.response).prec)
             $('#mais-popular').html(JSON.parse(xhr.response).mp)
