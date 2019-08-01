@@ -125,7 +125,7 @@ def get_textos():
     # resp = [[1, 'aborto', 'Eu sou contra', 'for', 'n'], [2, 'aborto', 'Favoravel demais', 'for', 's'], [3, 'cotas', 'Eu sou contra', 'neutral', 's'], [4, 'maconha', 'Eu sou contra', 'for', 'n']]
 
 
-    with open('./outputs/textos.csv', mode='w+') as f:
+    with open('./outputs/textos.csv', mode='w') as f:
         f_writer = csv.writer(f, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
         f_writer.writerow(['id','tópico', 'texto', 'modelo resposta', 'acertou'])
@@ -135,7 +135,7 @@ def get_textos():
 
     return send_file('./outputs/textos.csv',
                      mimetype='text/csv',
-                     attachment_filename='Adjacency.csv',
+                     attachment_filename='Respostas.csv',
                      as_attachment=True)
     # resp = {1:'a', 2:'b', 3:'c'}
     # f = open('textos.txt', 'w+')
