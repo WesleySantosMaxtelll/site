@@ -121,6 +121,8 @@ def get_statistics():
 def get_textos():
     if not os.path.exists('./outputs'):
         os.makedirs('./outputs')
+    if os.path.exists("./outputs/textos.csv"):
+        os.remove("./outputs/textos.csv")
     resp = inter.get_textos()
     # resp = [[1, 'aborto', 'Eu sou contra', 'for', 'n'], [2, 'aborto', 'Favoravel demais', 'for', 's'], [3, 'cotas', 'Eu sou contra', 'neutral', 's'], [4, 'maconha', 'Eu sou contra', 'for', 'n']]
 
