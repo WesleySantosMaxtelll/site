@@ -121,6 +121,8 @@ def get_statistics():
 def get_textos():
     if not os.path.exists('./outputs'):
         os.makedirs('./outputs')
+
+    # nao
     if os.path.exists("./outputs/textos.csv"):
         os.remove("./outputs/textos.csv")
     resp = inter.get_textos()
