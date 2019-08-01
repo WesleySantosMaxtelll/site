@@ -31,7 +31,7 @@ class AcessaBD():
         return self.cur.fetchall()
 
     def get_precisao(self):
-        self.cur.execute("select count(*)::float/(select count(*) from textos) from textos where tag_user = 's';")
+        self.cur.execute("select count(*)::float/(SELECT CASE WHEN (select count(*) from textos) = 0 THEN 1 ELSE (select count(*) from textos) END AS column_alias) from textos where tag_user = 's';")
         return self.cur.fetchall()
 
     def get_mais_popular(self):
