@@ -104,9 +104,9 @@ def save_text():
 @app.route('/statistics', methods=['GET'])
 def get_statistics():
     t, p, mp = inter.statiscts()
-    # print(t)
-    # print(p)
-    # print(mp)
+    print(t)
+    print(p)
+    print(mp)
     if t[0][0] > 5:
         return jsonify({"prec":'{}%'.format(int(100*p[0][0])), "cont":t[0][0]})
     else:

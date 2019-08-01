@@ -735,7 +735,7 @@
         };
 
         xhr.onload = function() {
-            // alert()
+            alert(xhr.response)
             $('#contador-testes').html(JSON.parse(xhr.response).cont)
             $('#precisao').html(JSON.parse(xhr.response).prec)
             $('#mais-popular').html(JSON.parse(xhr.response).mp)
