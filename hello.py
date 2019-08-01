@@ -121,7 +121,7 @@ def get_statistics():
 def get_textos():
     resp = inter.get_textos()
 
-    with open('outputs/textos.csv', mode='w+') as f:
+    with open('./outputs/textos.csv', mode='w+') as f:
         f_writer = csv.writer(f, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
         f_writer.writerow(['id','tópico', 'texto', 'modelo resposta', 'acertou'])
@@ -129,7 +129,7 @@ def get_textos():
             print(i)
             f_writer.writerow(i)
 
-    return send_file('outputs/textos.csv',
+    return send_file('./outputs/textos.csv',
                      mimetype='text/csv',
                      attachment_filename='Adjacency.csv',
                      as_attachment=True)
