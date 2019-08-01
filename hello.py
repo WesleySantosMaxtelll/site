@@ -69,6 +69,7 @@ def root():
 #  * [ "Bob", "Jane" ]
 #  * @return An array of all the visitor names
 #  */
+
 @app.route('/post', methods=['POST', 'GET'])
 def put_visitor():
 
@@ -102,9 +103,11 @@ def save_text():
 
 @app.route('/statistics', methods=['GET'])
 def get_statistics():
-    t, p = inter.statiscts()
-    return jsonify({"prec":'{}%'.format(int(100*p[0][0])), "cont":t})
-    # else:
+    t, p, mp = inter.statiscts()
+    if t > 5:
+        return jsonify({"prec":'{}%'.format(int(100*p[0][0])), "cont":t})
+    else:
+        return jsonify({"prec":'{}%'.format('-'), "cont":t, "mp":mp})
     #     resp = 'Resposta'
     #     return jsonify({'prediction':resp})
 

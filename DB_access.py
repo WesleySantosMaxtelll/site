@@ -32,6 +32,10 @@ class AcessaBD():
         self.cur.execute("select count(*)::float/(select count(*) from textos) from textos where tag_user = 's';")
         return self.cur.fetchall()
 
+    def get_mais_popular(self):
+        self.cur.execute("select topic, count(*) as ctd from textos group by topic order by ctd desc limit 1;")
+        return self.cur.fetchall()[0][0]
+
         # return type(v)
     #
     # def devolveBuscasRecentesCliente(self, idCliente, N):
