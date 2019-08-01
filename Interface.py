@@ -36,3 +36,6 @@ class interface:
     def save_text(self, text, tag, ans, predicted):
         print(predicted)
         self.db.inserir_texto(text, tag, ans, self.dict_p[predicted])
+
+    def statiscts(self):
+        return self.db.get_total(), self.db.get_precisao()

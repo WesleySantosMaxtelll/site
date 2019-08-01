@@ -23,6 +23,15 @@ class AcessaBD():
     def get_textos(self):
         self.cur.execute("select * from textos;")
         return self.cur.fetchall()
+
+    def get_total(self):
+        self.cur.execute("select count(*) from textos;")
+        return self.cur.fetchall()
+
+    def get_precisao(self):
+        self.cur.execute("select count(*)::float/(select count(*) from textos) from textos where tag_user = 's';")
+        return self.cur.fetchall()
+
         # return type(v)
     #
     # def devolveBuscasRecentesCliente(self, idCliente, N):

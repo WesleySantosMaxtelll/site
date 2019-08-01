@@ -273,7 +273,7 @@
                 <div class="col-12 col-md-3 col-lg-3">
                     <div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.2s">
                         <div class="counter-area">
-                            <h3><span class="counter">350</span></h3>
+                            <h3><span id="contador-testes" class="counter">-</span></h3>
                         </div>
                         <div class="cool-facts-content">
                             <i class="ion-arrow-down-a"></i>
@@ -285,7 +285,7 @@
                 <div class="col-12 col-md-3 col-lg-3">
                     <div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.4s">
                         <div class="counter-area">
-                            <h3><span class="counter">76%</span></h3>
+                            <h3><span id="precisao" class="counter">-</span></h3>
                         </div>
                         <div class="cool-facts-content">
                             <i class="ion-happy-outline"></i>
@@ -567,6 +567,7 @@
     var text = "";
     var radios = "";
     var model_ans = "";
+    
 
     function sendAnsFunction(){
         // alert(text);
@@ -663,7 +664,7 @@
                   // document.getElementById("button-sub").style.display = "block";
                   model_ans = xhr.response
                   if (model_ans == 'Favorável') {
-                    document.getElementById("text-response").style.color = "#45a332";  
+                    document.getElementById("text-response").style.color = "#4fc737";  
                   } 
 
                   if (model_ans == 'Contrária') {
@@ -702,6 +703,32 @@
             // );
         }
     }
+
+
+    function setStatistic(){
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "./statistics", true);
+        xhr.responseType = 'application/json';
+        // xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+
+        // send the collected data as JSON
+        xhr.send(null);
+
+        xhr.onerror = function() {
+            $('#contador-testes').html("-")
+            $('#precisao').html("-")
+        };
+
+        xhr.onload = function() {
+            // alert()
+            $('#contador-testes').html(JSON.parse(xhr.response).cont)
+            $('#precisao').html(JSON.parse(xhr.response).prec)
+          
+        };
+
+    }
+    setStatistic();
 
     // //Retrieve all the visitors from the database
     // function getNames(){
