@@ -619,6 +619,7 @@
         xhr.onload = function() {
           // alert(`Loaded: ${xhr.status} ${xhr.response}`);
             $('input[name="rps"]').prop('checked', false);
+            document.getElementById('user_name').value = "";
           // $('#response').html($.i18n('hello', AntiXSS.sanitizeInput(xhr.response.prediction)));
           document.getElementById("loader_response").style.display = "none";
           document.getElementById("topic-cont").style.display = "block";
